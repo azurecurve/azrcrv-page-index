@@ -1,0 +1,124 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Page Index\n"
+"POT-Creation-Date: 2019-02-24 18:40+0000\n"
+"PO-Revision-Date: 2019-02-24 18:40+0000\n"
+"Last-Translator: \n"
+"Language-Team: https://translate.azurecurve.co.uk/\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e\n"
+"X-Poedit-SearchPath-0: azrcrv-page-index.php\n"
+
+#: azrcrv-page-index.php:177
+msgid "Settings"
+msgstr ""
+
+#: azrcrv-page-index.php:194
+msgid "Page Index Settings"
+msgstr ""
+
+#: azrcrv-page-index.php:195
+msgid "Page Index"
+msgstr ""
+
+#: azrcrv-page-index.php:209
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: azrcrv-page-index.php:220
+msgid "Settings have been saved."
+msgstr ""
+
+#: azrcrv-page-index.php:233
+msgid ""
+"If the options are blank then the defaults in the plugin's CSS will be used."
+msgstr ""
+
+#: azrcrv-page-index.php:236
+msgid "Color"
+msgstr ""
+
+#: azrcrv-page-index.php:238
+msgid "Set default color (e.g. #FFF)"
+msgstr ""
+
+#: azrcrv-page-index.php:241
+msgid "Background Color"
+msgstr ""
+
+#: azrcrv-page-index.php:243
+msgid "Set default background color (e.g. #000)"
+msgstr ""
+
+#: azrcrv-page-index.php:246
+msgid "Width"
+msgstr ""
+
+#: azrcrv-page-index.php:248
+msgid "Set default width (e.g. 48.4%)"
+msgstr ""
+
+#: azrcrv-page-index.php:251
+msgid "Height"
+msgstr ""
+
+#: azrcrv-page-index.php:253
+msgid "Set default height (e.g. 100px)"
+msgstr ""
+
+#: azrcrv-page-index.php:256
+msgid "Line Height"
+msgstr ""
+
+#: azrcrv-page-index.php:258
+msgid "Set default line height (e.g. 100px)"
+msgstr ""
+
+#: azrcrv-page-index.php:261
+msgid "Margin"
+msgstr ""
+
+#: azrcrv-page-index.php:263
+msgid "Set default margin (e.g. 4px)"
+msgstr ""
+
+#: azrcrv-page-index.php:266
+msgid "Padding"
+msgstr ""
+
+#: azrcrv-page-index.php:268
+msgid "Set default padding (e.g. 3px 2px 3px 2px)"
+msgstr ""
+
+#: azrcrv-page-index.php:271
+msgid "Text Align"
+msgstr ""
+
+#: azrcrv-page-index.php:273
+msgid "Set default textalign (e.g. center or left)"
+msgstr ""
+
+#: azrcrv-page-index.php:276
+msgid "Font-Weight"
+msgstr ""
+
+#: azrcrv-page-index.php:278
+msgid "Set default fontweight (e.g. 700)"
+msgstr ""
+
+#: azrcrv-page-index.php:286
+msgid ""
+"azrcrv-pi-color (or azc_pi_color) and azrcrv-pi-background (or "
+"azi_pi_background) custom fields can be applied to a page to change the "
+"color of that pages appearance in the page index."
+msgstr ""
+
+#: azrcrv-page-index.php:300
+msgid "You do not have permissions to perform this action"
+msgstr ""

@@ -1,0 +1,14 @@
+/* page index
+----------------------------------------------- */
+a.azrcrv-pi{
+	display: inline-block;
+	width: 48.5%;
+	height: 100px;
+	margin: 4px;
+	color: #fff;
+	background: #000;
+	line-height: 100px;
+	text-align: center;
+	text-decoration: none;
+	font-weight: 700;
+}
