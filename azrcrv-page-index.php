@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Page Index
  * Description: Displays Index of Pages using page-index Shortcode; uses the Parent Page field to determine content of index or one of supplied pageid or slug parameters.
- * Version: 1.0.1
+ * Version: 1.1.0
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/page-index
@@ -419,7 +419,12 @@ function azrcrv_pi_display_page_index($atts, $content = null){
 	
 	global $wpdb;
 	
-	$page_url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+	if (is_ssl()){
+			$protocol = 'https';
+	}else{
+			$protocol = 'http';
+	}
+	$page_url = $protocol."://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 	if (substr($page_url, -1) == "/"){
 		$page_url = substr($page_url, 0, -1);
 	}

@@ -34,6 +34,8 @@ To install the Page Index plugin:
 
 == Changelog ==
 Changes and feature additions for the Page Index plugin:
+= 1.1.0 =
+* Add protocol check when constructing page index.
 = 1.0.1 =
 * Update azurecurve menu for easier maintenance.
 * Move require of azurecurve menu below security check.
