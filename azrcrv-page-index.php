@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Page Index
  * Description: Displays Index of Pages using page-index Shortcode; uses the Parent Page field to determine content of index or one of supplied pageid or slug parameters.
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/page-index
@@ -24,6 +24,10 @@ if (!defined('ABSPATH')){
 
 // include plugin menu
 require_once(dirname( __FILE__).'/pluginmenu/menu.php');
+register_activation_hook(__FILE__, 'azrcrv_create_plugin_menu_pi');
+
+// include update client
+require_once(dirname(__FILE__).'/libraries/updateclient/UpdateClient.class.php');
 
 /**
  * Setup registration activation hook, actions, filters and shortcodes.
@@ -39,6 +43,7 @@ add_action('admin_menu', 'azrcrv_pi_create_admin_menu');
 add_action('admin_post_azrcrv_pi_save_options', 'azrcrv_pi_save_options');
 add_action('wp_enqueue_scripts', 'azrcrv_pi_load_css');
 //add_action('the_posts', 'azrcrv_pi_check_for_shortcode');
+add_action('plugins_loaded', 'azrcrv_pi_load_languages');
 
 
 // add filters
@@ -47,6 +52,17 @@ add_filter('plugin_action_links', 'azrcrv_pi_add_plugin_action_link', 10, 2);
 // add shortcodes
 add_shortcode('page-index', 'azrcrv_pi_display_page_index');
 add_shortcode('PAGE-INDEX', 'azrcrv_pi_display_page_index');
+
+/**
+ * Load language files.
+ *
+ * @since 1.0.0
+ *
+ */
+function azrcrv_pi_load_languages() {
+    $plugin_rel_path = basename(dirname(__FILE__)).'/languages';
+    load_plugin_textdomain('azrcrv-pi', false, $plugin_rel_path);
+}
 
 /**
  * Check if shortcode on current page and then load css and jqeury.
@@ -214,7 +230,7 @@ function azrcrv_pi_display_options(){
 	?>
 	<div id="azrcrv-pi-general" class="wrap">
 		<fieldset>
-			<h2><?php echo esc_html(get_admin_page_title()); ?></h2>
+			<h1><?php echo esc_html(get_admin_page_title()); ?></h1>
 			<?php if(isset($_GET['settings-updated'])){ ?>
 				<div class="notice notice-success is-dismissible">
 					<p><strong><?php esc_html_e('Settings have been saved.', 'page-index'); ?></strong></p>
