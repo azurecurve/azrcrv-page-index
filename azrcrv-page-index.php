@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Page Index
  * Description: Displays Index of Pages using page-index Shortcode; uses the Parent Page field to determine content of index or one of supplied pageid or slug parameters.
- * Version: 1.2.0
+ * Version: 1.2.1
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/page-index
@@ -61,7 +61,7 @@ add_shortcode('PAGE-INDEX', 'azrcrv_pi_display_page_index');
  */
 function azrcrv_pi_load_languages() {
     $plugin_rel_path = basename(dirname(__FILE__)).'/languages';
-    load_plugin_textdomain('azrcrv-pi', false, $plugin_rel_path);
+    load_plugin_textdomain('page-index', false, $plugin_rel_path);
 }
 
 /**
