@@ -70,7 +70,7 @@ This plugin is developed for ClassicPress, but will likely work on WordPress.
 ### [Version 1.1.0](https://github.com/azurecurve/azrcrv-page-index/tree/v1.1.0)
  * Add protocol check when constructing page index.
 
-### [Version 1.0.1(https://github.com/azurecurve/azrcrv-page-index/tree/v1.0.1)
+### [Version 1.0.1](https://github.com/azurecurve/azrcrv-page-index/tree/v1.0.1)
  * Update azurecurve menu for easier maintenance.
  * Move require of azurecurve menu below security check.
 
