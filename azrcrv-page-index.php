@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Page Index
  * Description: Displays Index of Pages using page-index Shortcode; uses the Parent Page field to determine content of index or one of supplied pageid or slug parameters.
- * Version: 1.2.2
+ * Version: 1.2.3
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/page-index/
@@ -120,6 +120,9 @@ function azrcrv_pi_load_css(){
  */
 function azrcrv_pi_set_default_options($networkwide){
 	
+	$option_name = 'azrcrv-pi';
+	$old_option_name = 'azc_pi';
+	
 	$new_options = array(
 				"color" => ""
 				,"background" => ""
@@ -136,44 +139,73 @@ function azrcrv_pi_set_default_options($networkwide){
 
 			foreach ($blog_ids as $blog_id){
 				switch_to_blog($blog_id);
-
-				if (get_option('azrcrv-pi') === false){
-					if (get_option('azc_pi') === false){
-						add_option('azrcrv-pi', $new_options);
-					}else{
-						add_option('azrcrv-pi', get_option('azc_pi'));
-					}
-				}
+				
+				azrcrv_pi_update_options($option_name, $new_options, false, $old_option_name);
 			}
 
 			switch_to_blog($original_blog_id);
 		}else{
-			if (get_option('azrcrv-pi') === false){
-				if (get_option('azc_pi') === false){
-					add_option('azrcrv-pi', $new_options);
-				}else{
-					add_option('azrcrv-pi', get_option('azc_pi'));
-				}
-			}
+			azrcrv_pi_update_options( $option_name, $new_options, false, $old_option_name);
 		}
-		if (get_site_option('azrcrv-pi') === false){
-				if (get_option('azc_pi') === false){
-					add_option('azrcrv-pi', $new_options);
-				}else{
-					add_option('azrcrv-pi', get_option('azc_pi'));
-				}
+		if (get_site_option($option_name) === false){
+			azrcrv_pi_update_options($option_name, $new_options, true, $old_option_name);
 		}
 	}
 	//set defaults for single site
 	else{
-		if (get_option('azrcrv-pi') === false){
-				if (get_option('azc_pi') === false){
-					add_option('azrcrv-pi', $new_options);
-				}else{
-					add_option('azrcrv-pi', get_option('azc_pi'));
-				}
+		azrcrv_pi_update_options($option_name, $new_options, false, $old_option_name);
+	}
+}
+
+/**
+ * Update options.
+ *
+ * @since 1.2.3
+ *
+ */
+function azrcrv_pi_update_options($option_name, $new_options, $is_network_site, $old_option_name){
+	if ($is_network_site == true){
+		if (get_site_option($option_name) === false){
+			if (get_site_option($old_option_name) === false){
+				add_site_option($option_name, $new_options);
+			}else{
+				add_site_option($option_name, azrcrv_pi_update_default_options($new_options, get_site_option($old_option_name)));
+			}
+		}else{
+			update_site_option($option_name, azrcrv_pi_update_default_options($new_options, get_site_option($option_name)));
+		}
+	}else{
+		if (get_option($option_name) === false){
+			if (get_option($old_option_name) === false){
+				add_option($option_name, $new_options);
+			}else{
+				add_option($option_name, azrcrv_pi_update_default_options($new_options, get_option($old_option_name)));
+			}
+		}else{
+			update_option($option_name, azrcrv_pi_update_default_options($new_options, get_option($option_name)));
 		}
 	}
+}
+
+
+/**
+ * Add default options to existing options.
+ *
+ * @since 1.2.3
+ *
+ */
+function azrcrv_pi_update_default_options( &$default_options, $current_options ) {
+    $default_options = (array) $default_options;
+    $current_options = (array) $current_options;
+    $updated_options = $current_options;
+    foreach ($default_options as $key => &$value) {
+        if (is_array( $value) && isset( $updated_options[$key ])){
+            $updated_options[$key] = azrcrv_pi_update_default_options($value, $updated_options[$key]);
+        } else {
+            $updated_options[$key] = $value;
+        }
+    }
+    return $updated_options;
 }
 
 /**
