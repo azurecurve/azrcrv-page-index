@@ -261,6 +261,13 @@ if (!function_exists('azrcrv_populate_plugin_menu_pi')){
 				'retired' => 0,
 				'updated' => '2020-04-04',
 			),
+			'Nearby' => array(
+				'plugin_link' => 'azrcrv-nearby/azrcrv-nearby.php',
+				'admin_URL' => 'admin.php?page=azrcrv-n',
+				'dev_URL' => 'https://development.azurecurve.co.uk/classicpress-plugins/nearby/',
+				'retired' => 0,
+				'updated' => '2020-08-05',
+			),
 			'Page Index' => array(
 				'plugin_link' => 'azrcrv-page-index/azrcrv-page-index.php',
 				'admin_URL' => 'admin.php?page=azrcrv-pi',

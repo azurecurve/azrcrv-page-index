@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Page Index
  * Description: Displays Index of Pages using page-index Shortcode; uses the Parent Page field to determine content of index or one of supplied pageid or slug parameters.
- * Version: 1.2.4
+ * Version: 1.2.5
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/page-index/
@@ -478,8 +478,8 @@ function azrcrv_pi_display_page_index($atts, $content = null){
 		$page_url = substr($page_url, 0, -1);
 	}
 	
-	if (strlen($postid) > 0){
-		$pageid = $postid;
+	if (strlen($pageid) > 0 AND $pageid != 0){
+		$pageid = $pageid;
 	}elseif (strlen($slug) > 0){
 		$page = get_page_by_path($slug);
 		$pageid = $page->ID;
