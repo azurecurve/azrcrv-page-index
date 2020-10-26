@@ -59,7 +59,7 @@ This plugin is developed for ClassicPress, but will likely work on WordPress.
 # Changelog
 
 ### [Version 1.3.1](https://github.com/azurecurve/azrcrv-page-index/releases/tag/v1.3.1)
- * Fix bug with incorrect plugin slug delcaration for plugin icon and banner.
+ * Fix bug with incorrect plugin slug declaration for plugin icon and banner.
  
 ### [Version 1.3.0](https://github.com/azurecurve/azrcrv-page-index/releases/tag/v1.3.0)
  * Add integration with [Timelines](https://development.azurecurve.co.uk/classicpress-plugins/timelines/) from [azurecurve](https://development.azurecurve.co.uk/classicpress-plugins/).
