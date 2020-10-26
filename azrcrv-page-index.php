@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Page Index
  * Description: Displays Index of Pages using page-index Shortcode; uses the Parent Page field to determine content of index or one of supplied pageid or slug parameters.
- * Version: 1.2.5
+ * Version: 1.3.0
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/page-index/
@@ -48,6 +48,8 @@ add_action('plugins_loaded', 'azrcrv_pi_load_languages');
 
 // add filters
 add_filter('plugin_action_links', 'azrcrv_pi_add_plugin_action_link', 10, 2);
+add_filter('codepotent_update_manager_image_path', 'azrcrv_pi_custom_image_path');
+add_filter('codepotent_update_manager_image_url', 'azrcrv_pi_custom_image_url');
 
 // add shortcodes
 add_shortcode('page-index', 'azrcrv_pi_display_page_index');
@@ -113,6 +115,32 @@ function azrcrv_pi_load_css(){
 }
 
 /**
+ * Custom plugin image path.
+ *
+ * @since 1.3.0
+ *
+ */
+function azrcrv_pi_custom_image_path($path){
+    if (strpos($path, 'azrcrv-nearby') !== false){
+        $path = plugin_dir_path(__FILE__).'assets/pluginimages';
+    }
+    return $path;
+}
+
+/**
+ * Custom plugin image url.
+ *
+ * @since 1.3.0
+ *
+ */
+function azrcrv_pi_custom_image_url($url){
+    if (strpos($url, 'azrcrv-nearby') !== false){
+        $url = plugin_dir_url(__FILE__).'assets/pluginimages';
+    }
+    return $url;
+}
+
+/**
  * Set default options for plugin.
  *
  * @since 1.0.0
@@ -126,7 +154,9 @@ function azrcrv_pi_set_default_options($networkwide){
 	$new_options = array(
 						"color" => "",
 						"background" => "",
-						'updated' => strtotime('2020-04-04'),
+						'timeline-integration' => 0,
+						'timeline-signifier' => '*',
+						'updated' => strtotime('2020-10-26'),
 			);
 	
 	// set defaults for multi-site
@@ -326,6 +356,28 @@ function azrcrv_pi_display_options(){
 					<input type="text" name="fontweight" value="<?php echo esc_html(stripslashes($options['fontweight'])); ?>" class="large-text" />
 					<p class="description"><?php esc_html_e('Set default fontweight (e.g. 700)', 'page-index'); ?></p>
 				</td></tr>
+									
+				<tr>
+					<th scope="row">
+						<label for="timeline-integration"><?php esc_html_e('Integrate with Timelines from azurecurve', 'page-index'); ?></label></th>
+					<td>
+						<?php
+							if (azrcrv_n_is_plugin_active('azrcrv-timelines/azrcrv-timelines.php')){ ?>
+								<label for="timeline-integration"><input name="timeline-integration" type="checkbox" id="timeline-integration" value="1" <?php checked('1', $options['timeline-integration']); ?> /><?php _e('Enable integration with Timelines from azurecurve?', 'page-index'); ?></label>
+							<?php }else{
+								echo esc_html_e('Timelines from azurecurve not installed/activated.', 'page-index');
+							}
+							?>
+					</td>
+				</tr>
+				
+				<?php
+					if (azrcrv_n_is_plugin_active('azrcrv-timelines/azrcrv-timelines.php')){ ?>
+						<tr><th scope="row"><label for="timeline-signifier"><?php esc_html_e('Timeline Signifier', 'page-index'); ?></label></th><td>
+							<input name="timeline-signifier" type="text" id="timeline-signifier" value="<?php echo stripslashes($options['timeline-signifier']); ?>" class="small-text" /> <?php _e('Symbol to display next to page index entries which have a timeline entry', 'page-index'); ?></td>
+						</td></tr>
+					<?php }
+				?>
 				
 				</table>
 				
@@ -349,63 +401,76 @@ function azrcrv_pi_save_options(){
 		wp_die(esc_html__('You do not have permissions to perform this action', 'page-index'));
 	}
 	// Check that nonce field created in configuration form is present
-	check_admin_referer('azrcrv-pi', 'azrcrv-pi-nonce');
-	settings_fields('azrcrv-pi');
+	// Check that nonce field created in configuration form is present
+	if (! empty($_POST) && check_admin_referer('azrcrv-pi', 'azrcrv-pi-nonce')){
 	
-	// Retrieve original plugin options array
-	$options = get_option('azrcrv-pi');
-	
-	$option_name = 'color';
-	if (isset($_POST[$option_name])){
-		$options[$option_name] = sanitize_text_field($_POST[$option_name]);
+		// Retrieve original plugin options array
+		$options = get_option('azrcrv-pi');
+		
+		$option_name = 'color';
+		if (isset($_POST[$option_name])){
+			$options[$option_name] = sanitize_text_field($_POST[$option_name]);
+		}
+		
+		$option_name = 'background';
+		if (isset($_POST[$option_name])){
+			$options[$option_name] = sanitize_text_field($_POST[$option_name]);
+		}
+		
+		$option_name = 'width';
+		if (isset($_POST[$option_name])){
+			$options[$option_name] = sanitize_text_field($_POST[$option_name]);
+		}
+		
+		$option_name = 'height';
+		if (isset($_POST[$option_name])){
+			$options[$option_name] = sanitize_text_field($_POST[$option_name]);
+		}
+		
+		$option_name = 'lineheight';
+		if (isset($_POST[$option_name])){
+			$options[$option_name] = sanitize_text_field($_POST[$option_name]);
+		}
+		
+		$option_name = 'margin';
+		if (isset($_POST[$option_name])){
+			$options[$option_name] = sanitize_text_field($_POST[$option_name]);
+		}
+		
+		$option_name = 'textalign';
+		if (isset($_POST[$option_name])){
+			$options[$option_name] = sanitize_text_field($_POST[$option_name]);
+		}
+		
+		$option_name = 'padding';
+		if (isset($_POST[$option_name])){
+			$options[$option_name] = sanitize_text_field($_POST[$option_name]);
+		}
+		
+		$option_name = 'fontweight';
+		if (isset($_POST[$option_name])){
+			$options[$option_name] = sanitize_text_field($_POST[$option_name]);
+		}
+			
+		$option_name = 'timeline-integration';
+		if (isset($_POST[$option_name])){
+			$options[$option_name] = 1;
+		}else{
+			$options[$option_name] = 0;
+		}
+		
+		$option_name = 'timeline-signifier';
+		if (isset($_POST[$option_name])){
+			$options[$option_name] = sanitize_text_field($_POST[$option_name]);
+		}
+		
+		// Store updated options array to database
+		update_option('azrcrv-pi', $options);
+		
+		// Redirect the page to the configuration form that was processed
+		wp_redirect(add_query_arg('page', 'azrcrv-pi&settings-updated', admin_url('admin.php')));
+		exit;
 	}
-	
-	$option_name = 'background';
-	if (isset($_POST[$option_name])){
-		$options[$option_name] = sanitize_text_field($_POST[$option_name]);
-	}
-	
-	$option_name = 'width';
-	if (isset($_POST[$option_name])){
-		$options[$option_name] = sanitize_text_field($_POST[$option_name]);
-	}
-	
-	$option_name = 'height';
-	if (isset($_POST[$option_name])){
-		$options[$option_name] = sanitize_text_field($_POST[$option_name]);
-	}
-	
-	$option_name = 'lineheight';
-	if (isset($_POST[$option_name])){
-		$options[$option_name] = sanitize_text_field($_POST[$option_name]);
-	}
-	
-	$option_name = 'margin';
-	if (isset($_POST[$option_name])){
-		$options[$option_name] = sanitize_text_field($_POST[$option_name]);
-	}
-	
-	$option_name = 'textalign';
-	if (isset($_POST[$option_name])){
-		$options[$option_name] = sanitize_text_field($_POST[$option_name]);
-	}
-	
-	$option_name = 'padding';
-	if (isset($_POST[$option_name])){
-		$options[$option_name] = sanitize_text_field($_POST[$option_name]);
-	}
-	
-	$option_name = 'fontweight';
-	if (isset($_POST[$option_name])){
-		$options[$option_name] = sanitize_text_field($_POST[$option_name]);
-	}
-	
-	// Store updated options array to database
-	update_option('azrcrv-pi', $options);
-	
-	// Redirect the page to the configuration form that was processed
-	wp_redirect(add_query_arg('page', 'azrcrv-pi&settings-updated', admin_url('admin.php')));
-	exit;
 }
 
 /**
@@ -468,7 +533,7 @@ function azrcrv_pi_display_page_index($atts, $content = null){
 	
 	global $wpdb;
 	
-	if (is_ssl()){
+	/*if (is_ssl()){
 			$protocol = 'https';
 	}else{
 			$protocol = 'http';
@@ -476,7 +541,7 @@ function azrcrv_pi_display_page_index($atts, $content = null){
 	$page_url = $protocol."://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 	if (substr($page_url, -1) == "/"){
 		$page_url = substr($page_url, 0, -1);
-	}
+	}*/
 	
 	if (strlen($pageid) > 0 AND $pageid != 0){
 		$pageid = $pageid;
@@ -486,6 +551,7 @@ function azrcrv_pi_display_page_index($atts, $content = null){
 	}else{
 		$pageid = get_the_ID();
 	}
+	$page_url = get_permalink($pageid);
 
 	$sql = $wpdb->prepare("SELECT ID, post_title, post_name FROM ".$wpdb->prefix."posts WHERE post_status = 'publish' AND post_type = 'page' AND post_parent=%s ORDER BY menu_order, post_title ASC", $pageid);
 	
@@ -514,7 +580,25 @@ function azrcrv_pi_display_page_index($atts, $content = null){
 		}else{
 			$overridebackground = $background;
 		}
-		$output .= "<a href='".$page_url."/".$myrow->post_name."/' class='azrcrv-pi' style='$overridecolor $overridebackground $width $height $lineheight $margin $textalign $padding $fontweight'>".$myrow->post_title."</a>";
+			
+		$timeline_signifier = '';
+		
+		if ($options['timeline-integration'] == 1){
+			$sql = "SELECT COUNT(pm.meta_value) FROM ".$wpdb->prefix."posts as p INNER JOIN ".$wpdb->prefix."postmeta AS pm ON pm.post_id = p.ID WHERE p.post_status = 'publish' AND p.post_type = 'timeline-entry' AND pm.meta_key = 'azc_t_metafields' AND pm.meta_value LIKE '%s'";
+			
+			$timeline_exists = $wpdb->get_var(
+									$wpdb->prepare(
+										$sql,
+										'%'.$page_url.$myrow->post_name.'%'
+									)
+								);
+			
+			if ($timeline_exists >= 1){
+				$timeline_signifier = $options['timeline-signifier'];
+			}
+		}
+		
+		$output .= "<a href='$page_url$myrow->post_name/' class='azrcrv-pi' style='$overridecolor $overridebackground $width $height $lineheight $margin $textalign $padding $fontweight'>$myrow->post_title $timeline_signifier</a>";
 	}
 	
 	return "<span class='azrcrv-pi'>".$output."</span>";
