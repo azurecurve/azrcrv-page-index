@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Page Index
  * Description: Displays Index of Pages using page-index Shortcode; uses the Parent Page field to determine content of index or one of supplied pageid or slug parameters.
- * Version: 1.3.1
+ * Version: 1.4.0
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/page-index/
@@ -35,19 +35,16 @@ require_once(dirname(__FILE__).'/libraries/updateclient/UpdateClient.class.php')
  * @since 1.0.0
  *
  */
-// add actions
-add_action('admin_init', 'azrcrv_pi_set_default_options');
 
 // add actions
 add_action('admin_menu', 'azrcrv_pi_create_admin_menu');
 add_action('admin_post_azrcrv_pi_save_options', 'azrcrv_pi_save_options');
-add_action('wp_enqueue_scripts', 'azrcrv_pi_load_css');
-//add_action('the_posts', 'azrcrv_pi_check_for_shortcode');
 add_action('plugins_loaded', 'azrcrv_pi_load_languages');
 
 
 // add filters
 add_filter('plugin_action_links', 'azrcrv_pi_add_plugin_action_link', 10, 2);
+add_filter('the_posts', 'azrcrv_pi_check_for_shortcode', 10, 2);
 add_filter('codepotent_update_manager_image_path', 'azrcrv_pi_custom_image_path');
 add_filter('codepotent_update_manager_image_url', 'azrcrv_pi_custom_image_url');
 
@@ -141,102 +138,26 @@ function azrcrv_pi_custom_image_url($url){
 }
 
 /**
- * Set default options for plugin.
+ * Get options including defaults.
  *
- * @since 1.0.0
+ * @since 1.4.0
  *
  */
-function azrcrv_pi_set_default_options($networkwide){
-	
-	$option_name = 'azrcrv-pi';
-	$old_option_name = 'azc_pi';
-	
-	$new_options = array(
+function azrcrv_pi_get_option($option_name){
+ 
+	$defaults = array(
 						"color" => "",
 						"background" => "",
 						'timeline-integration' => 0,
 						'timeline-signifier' => '*',
-						'updated' => strtotime('2020-10-26'),
-			);
-	
-	// set defaults for multi-site
-	if (function_exists('is_multisite') && is_multisite()){
-		// check if it is a network activation - if so, run the activation function for each blog id
-		if ($networkwide){
-			global $wpdb;
+					);
 
-			$blog_ids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
-			$original_blog_id = get_current_blog_id();
+	$options = get_option($option_name, $defaults);
 
-			foreach ($blog_ids as $blog_id){
-				switch_to_blog($blog_id);
-				
-				azrcrv_pi_update_options($option_name, $new_options, false, $old_option_name);
-			}
+	$options = wp_parse_args($options, $defaults);
 
-			switch_to_blog($original_blog_id);
-		}else{
-			azrcrv_pi_update_options( $option_name, $new_options, false, $old_option_name);
-		}
-		if (get_site_option($option_name) === false){
-			azrcrv_pi_update_options($option_name, $new_options, true, $old_option_name);
-		}
-	}
-	//set defaults for single site
-	else{
-		azrcrv_pi_update_options($option_name, $new_options, false, $old_option_name);
-	}
-}
+	return $options;
 
-/**
- * Update options.
- *
- * @since 1.2.3
- *
- */
-function azrcrv_pi_update_options($option_name, $new_options, $is_network_site, $old_option_name){
-	if ($is_network_site == true){
-		if (get_site_option($option_name) === false){
-			add_site_option($option_name, $new_options);
-		}else{
-			$options = get_site_option($option_name);
-			if (!isset($options['updated']) OR $options['updated'] < $new_options['updated'] ){
-				$options['updated'] = $new_options['updated'];
-				update_site_option($option_name, azrcrv_pi_update_default_options($options, $new_options));
-			}
-		}
-	}else{
-		if (get_option($option_name) === false){
-			add_option($option_name, $new_options);
-		}else{
-			$options = get_option($option_name);
-			if (!isset($options['updated']) OR $options['updated'] < $new_options['updated'] ){
-				$options['updated'] = $new_options['updated'];
-				update_option($option_name, azrcrv_pi_update_default_options($options, $new_options));
-			}
-		}
-	}
-}
-
-
-/**
- * Add default options to existing options.
- *
- * @since 1.2.3
- *
- */
-function azrcrv_pi_update_default_options( &$default_options, $current_options ) {
-    $default_options = (array) $default_options;
-    $current_options = (array) $current_options;
-    $updated_options = $current_options;
-    foreach ($default_options as $key => &$value) {
-        if (is_array( $value) && isset( $updated_options[$key])){
-            $updated_options[$key] = azrcrv_pi_update_default_options($value, $updated_options[$key]);
-        } else {
-			$updated_options[$key] = $value;
-        }
-    }
-    return $updated_options;
 }
 
 /**
@@ -253,7 +174,7 @@ function azrcrv_pi_add_plugin_action_link($links, $file){
 	}
 
 	if ($file == $this_plugin){
-		$settings_link = '<a href="'.get_bloginfo('wpurl').'/wp-admin/admin.php?page=azrcrv-pi"><img src="'.plugins_url('/pluginmenu/images/Favicon-16x16.png', __FILE__).'" style="padding-top: 2px; margin-right: -5px; height: 16px; width: 16px;" alt="azurecurve" />'.esc_html__('Settings' ,'page-index').'</a>';
+		$settings_link = '<a href="'.admin_url('admin.php?page=azrcrv-pi').'"><img src="'.plugins_url('/pluginmenu/images/Favicon-16x16.png', __FILE__).'" style="padding-top: 2px; margin-right: -5px; height: 16px; width: 16px;" alt="azurecurve" />'.esc_html__('Settings' ,'page-index').'</a>';
 		array_unshift($links, $settings_link);
 	}
 
@@ -289,7 +210,7 @@ function azrcrv_pi_display_options(){
     }
 	
 	// Retrieve plugin configuration options from database
-	$options = get_option('azrcrv-pi');
+	$options = azrcrv_pi_get_option('azrcrv-pi');
 	?>
 	<div id="azrcrv-pi-general" class="wrap">
 		<fieldset>
@@ -481,7 +402,7 @@ function azrcrv_pi_save_options(){
  */
 function azrcrv_pi_display_page_index($atts, $content = null){
 	
-	$options = get_option('azrcrv-pi');
+	$options = azrcrv_pi_get_option('azrcrv-pi');
 	
 	if (!$options['color']){ $color = ''; }else{ $color = $options['color']; }
 	if (!$options['background']){ $background = ''; }else{ $background = $options['background']; }
