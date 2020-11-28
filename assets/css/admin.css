@@ -1,0 +1,9 @@
+.azrcrv_pi_tabs{
+	padding: 15px !important;
+}
+.azrcrv_pi_tabs.invisible{
+	display: none;
+}
+.azrcrv_pi_horiz{
+	margin: 0 0 0 10px;
+}
