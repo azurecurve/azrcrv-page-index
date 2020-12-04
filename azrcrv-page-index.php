@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Page Index
  * Description: Displays Index of Pages using page-index Shortcode; uses the Parent Page field to determine content of index or one of supplied pageid or slug parameters.
- * Version: 1.5.2
+ * Version: 1.5.3
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/page-index/
@@ -420,12 +420,12 @@ function azrcrv_pi_display_options(){
 										or <select name="icon-visited">
 												<option value="" <?php if($options['icon-visited'] == ''){ echo ' selected="selected"'; } ?>>&nbsp;</option>
 												<?php						
-												$images = azrcrv_i_get_icons();
-												
-												foreach ($images as $image){
-													echo '<option value="'.esc_html($image).'" ';
-													if($options['icon-visited'] == esc_html($image)){ echo ' selected="selected"'; }
-													echo '>'.esc_html($image).'</option>';
+												$icons = azrcrv_i_get_icons();
+													
+												foreach ($icons as $icon_id => $icon){
+													echo '<option value="'.esc_html($icon_id).'" ';
+													if($options['icon-visited'] == esc_html($icon_id)){ echo ' selected="selected"'; }
+													echo '>'.esc_html($icon_id).'</option>';
 												}
 											echo '</select>';
 										}
