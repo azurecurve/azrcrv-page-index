@@ -1,12 +1,12 @@
 === Page Index ===
 
 Description:	Shortcode which displays a simple tile based page index showing the child pages of the loaded page or of the supplied pageid or slug.
-Version:		1.5.3
+Version:		1.6.0
 Tags:			page, pages, index
 Author:			azurecurve
 Author URI:		https://development.azurecurve.co.uk/
 Plugin URI:		https://development.azurecurve.co.uk/classicpress-plugins/page-index/
-Download link:	https://github.com/azurecurve/azrcrv-page-index/releases/download/v1.5.3/azrcrv-page-index.zip
+Download link:	https://github.com/azurecurve/azrcrv-page-index/releases/download/v1.6.0/azrcrv-page-index.zip
 Donate link:	https://development.azurecurve.co.uk/support-development/
 Requires PHP:	5.6
 Requires:		1.0.0
@@ -62,6 +62,11 @@ This plugin is developed for ClassicPress, but will likely work on WordPress.
 
 # Changelog
 
+### [Version 1.6.0](https://github.com/azurecurve/azrcrv-page-index/releases/tag/v1.6.0)
+ * Refactor settings page to be accessible using tabs with aria.
+ * Update translations to escape strings.
+ * Update azurecurve menu and logo.
+ 
 ### [Version 1.5.3](https://github.com/azurecurve/azrcrv-page-index/releases/tag/v1.5.3)
  * Fix bug with available icons not listing when [Icons](https://development.azurecurve.co.uk/classicpress-plugins/icons/) integration enabled.
  
