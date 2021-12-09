@@ -10,6 +10,7 @@ To use simply place the [page-index] shortcode on a page or in a post. Tiled pag
 If a different page index is required, or the shortcode is used in a post use one of the following parameters:
 * `pageid`
 * `slug`
+
 e.g. `[page-index pageid='32']` or `[page-index slug='mythology/celtic-fairy-tales']`
 
 If both parameters are supplied, then pageid will take precedence and slug will be ignored.
