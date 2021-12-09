@@ -15,9 +15,9 @@ e.g. `[page-index pageid='32']` or `[page-index slug='mythology/celtic-fairy-tal
 
 If both parameters are supplied, then pageid will take precedence and slug will be ignored.
 
-Integrated with [Flags](https://development.azurecurve.co.uk/classicpress-plugins/flags/) plugin to display flag in page index; add custom **Flag** custom field to page.
+Integrated with [Flags](https://development.azurecurve.co.uk/classicpress-plugins/flags/) plugin to display flag in page index; add custom `Flag` custom field to page.
 
-Integrated with [Icons](https://development.azurecurve.co.uk/classicpress-plugins/icons/) plugin to display icon in page index; add custom **Icon** custom field to page.
+Integrated with [Icons](https://development.azurecurve.co.uk/classicpress-plugins/icons/) plugin to display icon in page index; add custom `Icon` custom field to page.
 
 This plugin is multisite compatible; each site will need settings to be configured in the admin dashboard.
 
