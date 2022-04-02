@@ -1,0 +1,207 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Page Index\n"
+"POT-Creation-Date: 2021-12-27 18:09+0000\n"
+"PO-Revision-Date: 2019-02-24 18:40+0000\n"
+"Last-Translator: \n"
+"Language-Team: translate@azurecurve.co.uk\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e\n"
+"X-Poedit-SearchPath-0: azrcrv-page-index.php\n"
+
+#: azrcrv-page-index.php:193
+msgid "Settings"
+msgstr ""
+
+#: azrcrv-page-index.php:210
+msgid "Page Index Settings"
+msgstr ""
+
+#: azrcrv-page-index.php:211
+msgid "Page Index"
+msgstr ""
+
+#: azrcrv-page-index.php:265
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: azrcrv-page-index.php:279
+#, php-format
+msgid ""
+"%s and %s custom fields can be applied to a page to change the color of a "
+"specific pages appearance in the page index."
+msgstr ""
+
+#: azrcrv-page-index.php:280
+msgid ""
+"If the options are blank then the defaults in the plugin's CSS will be used."
+msgstr ""
+
+#: azrcrv-page-index.php:288
+msgid "Color"
+msgstr ""
+
+#: azrcrv-page-index.php:292
+#, php-format
+msgid "Set default color (e.g. %1$s#FFF%2$s or %1$sblack%2$s)."
+msgstr ""
+
+#: azrcrv-page-index.php:306
+msgid "Background Color"
+msgstr ""
+
+#: azrcrv-page-index.php:310
+#, php-format
+msgid "Set default background color (e.g. %1$s#000%2$s or %1$swhite%2$s)."
+msgstr ""
+
+#: azrcrv-page-index.php:324
+msgid "Width"
+msgstr ""
+
+#: azrcrv-page-index.php:328
+#, php-format
+msgid "Set default width (e.g. %1$s#48&#37;%2$s or %1$s300px%2$s)."
+msgstr ""
+
+#: azrcrv-page-index.php:342
+msgid "Height"
+msgstr ""
+
+#: azrcrv-page-index.php:346
+#, php-format
+msgid "Set default height (e.g. %1$s100px%2$s)."
+msgstr ""
+
+#: azrcrv-page-index.php:360
+msgid "Line Height"
+msgstr ""
+
+#: azrcrv-page-index.php:364
+#, php-format
+msgid "Set default line height (e.g. %1$s100px%2$s)."
+msgstr ""
+
+#: azrcrv-page-index.php:378
+msgid "Margin"
+msgstr ""
+
+#: azrcrv-page-index.php:382
+#, php-format
+msgid "Set default margin (e.g. %1$s6px%2$s)."
+msgstr ""
+
+#: azrcrv-page-index.php:396
+msgid "Padding"
+msgstr ""
+
+#: azrcrv-page-index.php:400
+#, php-format
+msgid "Set default padding (e.g. %1$s3px 2px 3px 2px%2$s)."
+msgstr ""
+
+#: azrcrv-page-index.php:414
+msgid "Text Align"
+msgstr ""
+
+#: azrcrv-page-index.php:418
+#, php-format
+msgid "Set default text align (e.g. %1$scenter%2$s or %1$sleft%2$s)."
+msgstr ""
+
+#: azrcrv-page-index.php:432
+msgid "Font-Weight"
+msgstr ""
+
+#: azrcrv-page-index.php:436
+#, php-format
+msgid "Set default font-weight (e.g. %1$s900%2$s)."
+msgstr ""
+
+#: azrcrv-page-index.php:458 azrcrv-page-index.php:520
+#: azrcrv-page-index.php:564
+#, php-format
+msgid "Integrate with %s?"
+msgstr ""
+
+#: azrcrv-page-index.php:462 azrcrv-page-index.php:524
+#: azrcrv-page-index.php:568
+#, php-format
+msgid "Enable integration with %s from %s?"
+msgstr ""
+
+#: azrcrv-page-index.php:464 azrcrv-page-index.php:526
+#: azrcrv-page-index.php:570
+#, php-format
+msgid "%s from %s not installed/activated."
+msgstr ""
+
+#: azrcrv-page-index.php:466
+#, php-format
+msgid ""
+"Add a custom field called %s containing the required flag id to a page."
+msgstr ""
+
+#: azrcrv-page-index.php:482
+msgid "Flag Width"
+msgstr ""
+
+#: azrcrv-page-index.php:486
+#, php-format
+msgid "Minimum flag width is %dpx."
+msgstr ""
+
+#: azrcrv-page-index.php:500
+msgid "Flag Position"
+msgstr ""
+
+#: azrcrv-page-index.php:502 azrcrv-page-index.php:546
+msgid "Before"
+msgstr ""
+
+#: azrcrv-page-index.php:505 azrcrv-page-index.php:549
+msgid "After"
+msgstr ""
+
+#: azrcrv-page-index.php:528
+#, php-format
+msgid ""
+"Add a custom field called %s containing the required icon id to a page."
+msgstr ""
+
+#: azrcrv-page-index.php:544
+msgid "Icon Position"
+msgstr ""
+
+#: azrcrv-page-index.php:586
+msgid "Timeline Signifier"
+msgstr ""
+
+#: azrcrv-page-index.php:613
+msgid ""
+"Symbol displayed next to page index entries which have a timeline entry."
+msgstr ""
+
+#: azrcrv-page-index.php:642
+msgid "Settings have been saved."
+msgstr ""
+
+#: azrcrv-page-index.php:670
+msgid "Save Settings"
+msgstr ""
+
+#: azrcrv-page-index.php:677
+#, php-format
+msgid "This plugin integrates with the following plugins from %s:"
+msgstr ""
+
+#: azrcrv-page-index.php:732
+msgid "You do not have permissions to perform this action"
+msgstr ""
